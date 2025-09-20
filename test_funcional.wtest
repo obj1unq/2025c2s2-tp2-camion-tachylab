@@ -42,4 +42,19 @@ describe "El Camión" {
         assert.equals(2600, camion.pesoTotal())
         assert.that(camion.estaExcedidoDePeso())
     }
+    test "Es de nivel" {
+        camion.cargar(bumblebee)
+        bumblebee.estaTransformadoenRobot(false)
+        camion.cargar(bateriaAntiaerea)
+        bateriaAntiaerea.tieneMisilesCargados(false)
+        camion.cargar(residuosRadiactivos)
+        assert.equals(bateriaAntiaerea, camion.encontrarCosaDeNivel(0))
+        assert.equals(bumblebee, camion.encontrarCosaDeNivel(15))
+        assert.equals(residuosRadiactivos, camion.encontrarCosaDeNivel(200))
+        assert.throwsException({ camion.encontrarCosaDeNivel(30) } )
+        bumblebee.estaTransformadoenRobot(true)
+        assert.equals(bumblebee, camion.encontrarCosaDeNivel(30))
+        bateriaAntiaerea.tieneMisilesCargados(true)
+        assert.equals(bateriaAntiaerea, camion.encontrarCosaDeNivel(100))
+    }
 }

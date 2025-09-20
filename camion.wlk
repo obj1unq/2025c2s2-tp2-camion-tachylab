@@ -20,6 +20,9 @@ object camion {
 	method estaExcedidoDePeso() {
 		return self.pesoTotal() > pesoMaximo
 	}
+	method esDeNivel(nivelBuscado, unaCosa) {
+		return unaCosa.nivelPeligrosidad() == nivelBuscado
+	}
 	method validarDescargar(unaCosa) {
 		if (not self.puedeDescargar(unaCosa)) {
 			self.error(unaCosa + " no está cargada en el camión")
@@ -47,5 +50,8 @@ object camion {
 	}
 	method pesoTotal() {
 		return pesoTara + cosas.sum({unaCosa => unaCosa.peso()})
+	}
+	method encontrarCosaDeNivel(nivelBuscado) {
+		return cosas.find({unaCosa => self.esDeNivel(nivelBuscado, unaCosa)})
 	}
 }
