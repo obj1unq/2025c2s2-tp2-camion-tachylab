@@ -16,4 +16,12 @@ describe "El Camión" {
         assert.throwsException({camion.cargar(knightRider)})
         assert.throwsException({camion.descargar(bumblebee)})
     }
+    test "Todo Peso Par" {
+        camion.cargar(arenaGranel)
+        arenaGranel.peso(50)
+        camion.cargar(bumblebee)
+        assert.that(camion.esTodoPesoPar())
+        arenaGranel.peso(51)
+        assert.notThat(camion.esTodoPesoPar())
+    }
 }

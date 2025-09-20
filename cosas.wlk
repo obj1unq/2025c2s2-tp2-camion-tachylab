@@ -43,6 +43,9 @@ object bumblebee {
 		} else {
 			return peligrosidadAuto
 		}
+	}
+	method estaTransformadoenRobot(_estaTransformadoenRobot) {
+		estaTransformadoenRobot = _estaTransformadoenRobot
 	} 
 }
 

@@ -9,6 +9,9 @@ object camion {
 	method puedeDescargar(unaCosa) {
 		return cosas.contains(unaCosa)
 	}
+	method esParElPeso(unaCosa) {
+		return (unaCosa.peso() % 2) == 0
+	}
 	method validarDescargar(unaCosa) {
 		if (not self.puedeDescargar(unaCosa)) {
 			self.error(unaCosa + " no está cargada en el camión")
@@ -27,5 +30,8 @@ object camion {
 	method descargar(unaCosa) {
 		self.validarDescargar(unaCosa)
 		cosas.remove(unaCosa)
+	}
+	method esTodoPesoPar() {
+		return cosas.all({unaCosa => self.esParElPeso(unaCosa)})
 	}
 }
