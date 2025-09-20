@@ -24,4 +24,12 @@ describe "El Camión" {
         arenaGranel.peso(51)
         assert.notThat(camion.esTodoPesoPar())
     }
+    test "Hay Algo Con Peso" {
+        camion.cargar(bumblebee)
+        camion.cargar(arenaGranel)
+        arenaGranel.peso(50)
+        assert.that(camion.hayAlgoConPeso(50))
+        assert.that(camion.hayAlgoConPeso(800))
+        assert.notThat(camion.hayAlgoConPeso(500))
+    }
 }
