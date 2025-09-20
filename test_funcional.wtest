@@ -80,4 +80,21 @@ describe "El Camión" {
         bumblebee.estaTransformadoenRobot(true)
         assert.notThat(camion.puedeCircularEnRutaDeNivel(20))
     }
+    test "Más cosas" {
+        contenedorPortuario.cosasCargadas().clear()
+        assert.equals(100, contenedorPortuario.peso())
+        assert.equals(0, contenedorPortuario.nivelPeligrosidad())
+        contenedorPortuario.cosasCargadas().add(arenaGranel)
+        arenaGranel.peso(50)
+        contenedorPortuario.cosasCargadas().add(knightRider)
+        assert.equals(650, contenedorPortuario.peso())
+        assert.equals(10, contenedorPortuario.nivelPeligrosidad())
+        embalajeSeguridad.cosaEnvuelta(knightRider)
+        assert.equals(500, embalajeSeguridad.peso())
+        assert.equals(5, embalajeSeguridad.nivelPeligrosidad())
+        embalajeSeguridad.cosaEnvuelta(bumblebee)
+        bumblebee.estaTransformadoenRobot(false)
+        assert.equals(800, embalajeSeguridad.peso())
+        assert.equals(7.5, embalajeSeguridad.nivelPeligrosidad())
+    }
 }

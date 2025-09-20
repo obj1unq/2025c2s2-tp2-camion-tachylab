@@ -108,3 +108,34 @@ object residuosRadiactivos {
 		peso = _peso
 	}
 }
+
+//Más Cosas
+
+object contenedorPortuario {
+	//Atributos (Variables y Constantes)
+	const property cosasCargadas = #{}
+	//Metodos Lookers (Getters y Setters)
+	method peso() { 
+		return 100 + cosasCargadas.sum({unaCosa => unaCosa.peso()}) 
+	}
+	method nivelPeligrosidad() {
+		const nivelesPeligrosidadCosas = cosasCargadas.map({cosaCargada => cosaCargada.nivelPeligrosidad()})
+		return nivelesPeligrosidadCosas.maxIfEmpty({0})
+	}
+}
+
+
+object embalajeSeguridad {
+	//Atributos (Variables y Constantes)
+	var cosaEnvuelta = bumblebee
+	//Metodos Lookers (Getters y Setters)
+	method peso() { 
+		return cosaEnvuelta.peso()
+	}
+	method nivelPeligrosidad() { 
+		return cosaEnvuelta.nivelPeligrosidad() / 2
+	}
+	method cosaEnvuelta(_cosaEnvuelta) {
+		cosaEnvuelta = _cosaEnvuelta
+	}
+}
