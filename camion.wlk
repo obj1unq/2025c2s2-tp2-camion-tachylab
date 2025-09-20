@@ -54,4 +54,10 @@ object camion {
 	method encontrarCosaDeNivel(nivelBuscado) {
 		return cosas.find({unaCosa => self.esDeNivel(nivelBuscado, unaCosa)})
 	}
+	method cosasQueSuperenNivelPeligrosidad(nivel) {
+		return cosas.filter({unaCosa => unaCosa.nivelPeligrosidad() > nivel})
+	}
+	method cosasMasPeligrosasQue(unaCosa) {
+		return self.cosasQueSuperenNivelPeligrosidad(unaCosa.nivelPeligrosidad())
+	}
 }
