@@ -32,18 +32,18 @@ object bumblebee {
 	const peso = 800
 	const peligrosidadAuto = 15
 	const peligrosidadRobot = 30
+	var estaTransformadoenRobot = false
 	//Metodos Lookers (Getters y Setters)
 	method peso() { 
 		return peso 
 	}
-	method nivelPeligrosidad() { 
-		if (estaTransformadoEnRobot) {
+	method nivelPeligrosidad() {
+		if (estaTransformadoenRobot) {
 			return peligrosidadRobot
-		else {
+		} else {
 			return peligrosidadAuto
-			}
 		}
-	}
+	} 
 }
 
 object paqueteLadrillos {
@@ -58,6 +58,9 @@ object paqueteLadrillos {
 	method nivelPeligrosidad() { 
 		return nivelPeligrosidad
 	}
+	method cantidadLadrillos(_cantidadLadrillos) {
+		cantidadLadrillos = _cantidadLadrillos
+	}
 }
 
 object bateriaAntiaerea {
@@ -71,18 +74,19 @@ object bateriaAntiaerea {
 	method peso() { 
 		if (tieneMisilesCargados) {
 			return pesoConMisiles
-		else {
+		} else {
 			return pesoSinMisiles
 			}
 		}
-	}
-	method nivelPeligrosidad() { 
+	method nivelPeligrosidad() {
 		if (tieneMisilesCargados) {
 			return peligrosidadConMisiles
-		else {
+		} else {
 			return peligrosidadSinMisiles
-			}
 		}
+	}
+	method tieneMisilesCargados(_tieneMisilesCargados) {
+		tieneMisilesCargados = _tieneMisilesCargados
 	}
 }
 

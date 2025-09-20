@@ -1,3 +1,19 @@
 import camion.*
-
 import cosas.*
+
+describe "El Camión" {
+    method initialize() {
+        camion.cosas().clear()
+    }
+    
+    test "Carga y Descarga" {
+        camion.cargar(bumblebee)
+        assert.equals(#{bumblebee}, camion.cosas())
+        camion.cargar(knightRider)
+        assert.equals(#{bumblebee, knightRider}, camion.cosas())
+        camion.descargar(bumblebee)
+        assert.equals(#{knightRider}, camion.cosas())
+        assert.throwsException({camion.cargar(knightRider)})
+        assert.throwsException({camion.descargar(bumblebee)})
+    }
+}
