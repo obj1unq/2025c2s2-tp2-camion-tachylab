@@ -23,6 +23,10 @@ object camion {
 	method esDeNivel(nivelBuscado, unaCosa) {
 		return unaCosa.nivelPeligrosidad() == nivelBuscado
 	}
+	method puedeCircularEnRutaDeNivel(nivel) {
+		return not (self.estaExcedidoDePeso()) and self.cosasQueSuperenNivelPeligrosidad(nivel).isEmpty()
+
+	}
 	method validarDescargar(unaCosa) {
 		if (not self.puedeDescargar(unaCosa)) {
 			self.error(unaCosa + " no está cargada en el camión")
