@@ -1,5 +1,7 @@
 import camion.*
 import cosas.*
+import destinosYCaminos.*
+
 
 describe "El Camión" {
     method initialize() {
@@ -181,5 +183,44 @@ describe "El Camión" {
         assert.equals(45, residuosRadiactivos.peso())
         assert.equals(0, paqueteLadrillos.cantidadLadrillos())
         assert.equals(misilesDescargados, bateriaAntiaerea.estadoMisilesActual())
+    }
+}
+
+describe "Transporte" {
+    method initialize() {
+        almacen.almacenar(#{knightRider, residuosRadiactivos})
+        camion.cargar(bumblebee)
+        bumblebee.transformacion(auto)
+        camion.cargar(arenaGranel)
+        arenaGranel.peso(50)
+    }
+    test "Caso: ruta 9 exitoso" {
+        camion.transportar(almacen, ruta9)
+        assert.equals(#{knightRider, residuosRadiactivos, bumblebee, arenaGranel}, almacen.cosasAlmacenadas())
+        assert.equals(#{}, camion.cosas())
+    }
+    test "Caso: ruta 9 fallo por peligrosidad" {
+        bumblebee.transformacion(robot)
+        assert.throwsException({ camion.transportar(almacen, ruta9) })
+        assert.equals(#{knightRider, residuosRadiactivos}, almacen.cosasAlmacenadas())
+        assert.equals(#{bumblebee, arenaGranel}, camion.cosas())
+    }
+    test "Caso: ruta 9 fallo por exceso de peso" {
+        arenaGranel.peso(2000)
+        assert.throwsException({ camion.transportar(almacen, ruta9) })
+        assert.equals(#{knightRider, residuosRadiactivos}, almacen.cosasAlmacenadas())
+        assert.equals(#{bumblebee, arenaGranel}, camion.cosas())
+    }
+    test "Caso: caminos vecinales exitoso" {
+        caminosVecinales.pesoMaximoPermitido(2000)
+        camion.transportar(almacen, caminosVecinales)
+        assert.equals(#{knightRider, residuosRadiactivos, bumblebee, arenaGranel}, almacen.cosasAlmacenadas())
+        assert.equals(#{}, camion.cosas())
+    }
+    test "Caso: caminos vecinales fallido" {
+        caminosVecinales.pesoMaximoPermitido(300)
+        assert.throwsException({ camion.transportar(almacen, caminosVecinales) })
+        assert.equals(#{knightRider, residuosRadiactivos}, almacen.cosasAlmacenadas())
+        assert.equals(#{bumblebee, arenaGranel}, camion.cosas())
     }
 }

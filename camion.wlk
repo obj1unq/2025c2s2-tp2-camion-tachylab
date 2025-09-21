@@ -28,9 +28,6 @@ object camion {
 	method tieneAlgoQuePesaEntre(pesoMinimo, pesoMaximo) {
 		return cosas.any({unaCosa => unaCosa.peso() > pesoMinimo and unaCosa.peso() < pesoMaximo})
 	}
-	method cosaMasPesada() {
-		return cosas.max({unaCosa => unaCosa.peso()})
-	}
 	method validarDescargar(unaCosa) {
 		if (not self.puedeDescargar(unaCosa)) {
 			self.error(unaCosa + " no está cargada en el camión")
@@ -39,6 +36,11 @@ object camion {
 	method validarCargar(unaCosa) {
 		if (not self.puedeCargar(unaCosa)) {
 			self.error(unaCosa + " ya está cargada en el camión")
+		}
+	}
+	method validarTrasportar(camino) {
+		if (not camino.puedeTransportar(self)) {
+			self.error("No se puede transportar por " + camino)
 		}
 	}
 	//Metodos funcionales
@@ -68,6 +70,9 @@ object camion {
 	method cosasMasPeligrosasQue(unaCosa) {
 		return self.cosasQueSuperenNivelPeligrosidad(unaCosa.nivelPeligrosidad())
 	}
+	method cosaMasPesada() {
+		return cosas.max({unaCosa => unaCosa.peso()})
+	}
 	method pesosDeCosas() {
 		return cosas.map({unaCosa => unaCosa.peso()})
 	}
@@ -76,5 +81,13 @@ object camion {
 	}
 	method sufreAccidente() {
 		return cosas.forEach({unaCosa => unaCosa.efectoAccidente()})
+	}
+	method almacenarEn(destino) {
+		destino.almacenar(cosas)
+		cosas.clear()
+	}
+	method transportar(destino, camino) {
+		self.validarTrasportar(camino)
+		self.almacenarEn(destino)
 	}
 }
