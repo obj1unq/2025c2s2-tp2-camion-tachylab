@@ -18,7 +18,7 @@ object camion {
 		return unaCosa.peso() == pesoBuscado
 	}
 	method estaExcedidoDePeso() {
-		return self.pesoTotal() > pesoMaximoAceptable
+		return self.totalPeso() > pesoMaximoAceptable
 	}
 	method esDeNivel(nivelBuscado, unaCosa) {
 		return unaCosa.nivelPeligrosidad() == nivelBuscado
@@ -57,7 +57,7 @@ object camion {
 	method hayAlgoConPeso(pesoBuscado) {
 		return cosas.any({unaCosa => self.estoPesa(pesoBuscado, unaCosa)})
 	}
-	method pesoTotal() {
+	method totalPeso() {
 		return pesoTara + cosas.sum({unaCosa => unaCosa.peso()})
 	}
 	method encontrarCosaDeNivel(nivelBuscado) {
@@ -71,5 +71,8 @@ object camion {
 	}
 	method pesosDeCosas() {
 		return cosas.map({unaCosa => unaCosa.peso()})
+	}
+	method totalBultos() {
+		return cosas.sum({unaCosa => unaCosa.bultos()})
 	}
 }

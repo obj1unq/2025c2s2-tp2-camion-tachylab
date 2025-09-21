@@ -4,6 +4,7 @@ import cosas.*
 describe "El Camión" {
     method initialize() {
         camion.cosas().clear()
+        contenedorPortuario.cosasCargadas().clear()
     }
     
     test "Carga y Descarga" {
@@ -36,10 +37,10 @@ describe "El Camión" {
         camion.cargar(bumblebee)
         camion.cargar(paqueteLadrillos)
         paqueteLadrillos.cantidadLadrillos(300)
-        assert.equals(2400, camion.pesoTotal())
+        assert.equals(2400, camion.totalPeso())
         assert.notThat(camion.estaExcedidoDePeso())
         paqueteLadrillos.cantidadLadrillos(400)
-        assert.equals(2600, camion.pesoTotal())
+        assert.equals(2600, camion.totalPeso())
         assert.that(camion.estaExcedidoDePeso())
     }
     test "Es de nivel" {
@@ -118,5 +119,32 @@ describe "El Camión" {
         camion.cargar(paqueteLadrillos)
         paqueteLadrillos.cantidadLadrillos(300)
         assert.equals([800, 600], camion.pesosDeCosas())
+    }
+    test "totalBultos (Caso 1)" {
+        camion.cargar(contenedorPortuario)
+        contenedorPortuario.cosasCargadas().add(bumblebee)
+        contenedorPortuario.cosasCargadas().add(knightRider)
+        camion.cargar(embalajeSeguridad)
+        embalajeSeguridad.cosaEnvuelta(residuosRadiactivos)
+        camion.cargar(arenaGranel)
+        camion.cargar(paqueteLadrillos)
+        paqueteLadrillos.cantidadLadrillos(50)
+        camion.cargar(bateriaAntiaerea)
+        bateriaAntiaerea.tieneMisilesCargados(false)
+        assert.equals(9, camion.totalBultos())
+    }
+    test "totalBultos (Caso 2)" {
+        camion.cargar(paqueteLadrillos)
+        paqueteLadrillos.cantidadLadrillos(150)
+        camion.cargar(bateriaAntiaerea)
+        bateriaAntiaerea.tieneMisilesCargados(true)
+        camion.cargar(contenedorPortuario)
+        assert.equals(5, camion.totalBultos())
+    }
+    test "totalBultos (Caso 3)" {
+        camion.cargar(paqueteLadrillos)
+        paqueteLadrillos.cantidadLadrillos(350)
+        camion.cargar(arenaGranel)
+        assert.equals(4, camion.totalBultos())
     }
 }
