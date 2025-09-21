@@ -105,4 +105,12 @@ describe "El Camión" {
         assert.that(camion.tieneAlgoQuePesaEntre(5, 1000))
         assert.notThat(camion.tieneAlgoQuePesaEntre(900, 1000))
     }
+    test "Cosa más pesada" {
+        camion.cargar(bumblebee)
+        camion.cargar(paqueteLadrillos)
+        paqueteLadrillos.cantidadLadrillos(300)
+        assert.equals(#{bumblebee}, #{camion.cosaMasPesada()})
+        camion.cosas().clear()
+        assert.throwsException({ camion.cosaMasPesada() })
+    }
 }

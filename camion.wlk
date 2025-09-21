@@ -29,6 +29,9 @@ object camion {
 	method tieneAlgoQuePesaEntre(pesoMinimo, pesoMaximo) {
 		return cosas.any({unaCosa => unaCosa.peso() > pesoMinimo and unaCosa.peso() < pesoMaximo})
 	}
+	method cosaMasPesada() {
+		return cosas.max({unaCosa => unaCosa.peso()})
+	}
 	method validarDescargar(unaCosa) {
 		if (not self.puedeDescargar(unaCosa)) {
 			self.error(unaCosa + " no está cargada en el camión")
