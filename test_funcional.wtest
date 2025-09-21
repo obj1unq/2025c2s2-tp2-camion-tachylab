@@ -168,4 +168,18 @@ describe "El Camión" {
         assert.equals(88, paqueteLadrillos.cantidadLadrillos())
         assert.equals(misilesDescargados, bateriaAntiaerea.estadoMisilesActual())
     }
+    test "Accidente (Caso 2)" {
+        camion.cargar(bumblebee)
+        bumblebee.transformacion(robot)
+        camion.cargar(residuosRadiactivos)
+        residuosRadiactivos.peso(30)
+        camion.cargar(paqueteLadrillos)
+        paqueteLadrillos.cantidadLadrillos(10)
+        camion.cargar(bateriaAntiaerea)
+        camion.sufreAccidente()
+        assert.equals(auto, bumblebee.transformacion())
+        assert.equals(45, residuosRadiactivos.peso())
+        assert.equals(0, paqueteLadrillos.cantidadLadrillos())
+        assert.equals(misilesDescargados, bateriaAntiaerea.estadoMisilesActual())
+    }
 }
