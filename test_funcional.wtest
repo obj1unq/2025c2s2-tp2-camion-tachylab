@@ -165,7 +165,7 @@ describe "El Camión" {
         bateriaAntiaerea.estadoMisilesActual(misilesCargados)
         camion.sufreAccidente()
         assert.equals(robot, bumblebee.transformacion())
-        assert.equals(30, residuosRadiactivos.peso())
+        assert.equals(45, residuosRadiactivos.peso())
         assert.equals(70, arenaGranel.peso())
         assert.equals(88, paqueteLadrillos.cantidadLadrillos())
         assert.equals(misilesDescargados, bateriaAntiaerea.estadoMisilesActual())
