@@ -2,7 +2,7 @@ object camion {
 	//Atributos (Variables y Constantes)
 	const property cosas = #{}
 	const pesoTara = 1000
-	const pesoMaximo = 2500
+	const pesoMaximoAceptable = 2500
 	//Metodos Lookers (Getters y Setters)
 	//Metodos de validacion y sus condiciones
 	method puedeCargar(unaCosa) {
@@ -18,14 +18,16 @@ object camion {
 		return unaCosa.peso() == pesoBuscado
 	}
 	method estaExcedidoDePeso() {
-		return self.pesoTotal() > pesoMaximo
+		return self.pesoTotal() > pesoMaximoAceptable
 	}
 	method esDeNivel(nivelBuscado, unaCosa) {
 		return unaCosa.nivelPeligrosidad() == nivelBuscado
 	}
 	method puedeCircularEnRutaDeNivel(nivel) {
 		return not (self.estaExcedidoDePeso()) and self.cosasQueSuperenNivelPeligrosidad(nivel).isEmpty()
-
+	}
+	method tieneAlgoQuePesaEntre(pesoMinimo, pesoMaximo) {
+		return cosas.any({unaCosa => unaCosa.peso() > pesoMinimo and unaCosa.peso() < pesoMaximo})
 	}
 	method validarDescargar(unaCosa) {
 		if (not self.puedeDescargar(unaCosa)) {

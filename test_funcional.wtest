@@ -97,4 +97,12 @@ describe "El Camión" {
         assert.equals(800, embalajeSeguridad.peso())
         assert.equals(7.5, embalajeSeguridad.nivelPeligrosidad())
     }
+    test "Tiene algo que pesa entre dos valores" {
+        camion.cargar(bumblebee)
+        camion.cargar(paqueteLadrillos)
+        paqueteLadrillos.cantidadLadrillos(300)
+        assert.that(camion.tieneAlgoQuePesaEntre(5, 700))
+        assert.that(camion.tieneAlgoQuePesaEntre(5, 1000))
+        assert.notThat(camion.tieneAlgoQuePesaEntre(900, 1000))
+    }
 }
