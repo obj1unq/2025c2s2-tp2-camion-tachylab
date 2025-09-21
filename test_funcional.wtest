@@ -113,4 +113,10 @@ describe "El Camión" {
         camion.cosas().clear()
         assert.throwsException({ camion.cosaMasPesada() })
     }
+    test "Pesos" {
+        camion.cargar(bumblebee)
+        camion.cargar(paqueteLadrillos)
+        paqueteLadrillos.cantidadLadrillos(300)
+        assert.equals([800, 600], camion.pesosDeCosas())
+    }
 }

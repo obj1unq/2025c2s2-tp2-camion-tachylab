@@ -69,4 +69,7 @@ object camion {
 	method cosasMasPeligrosasQue(unaCosa) {
 		return self.cosasQueSuperenNivelPeligrosidad(unaCosa.nivelPeligrosidad())
 	}
+	method pesosDeCosas() {
+		return cosas.map({unaCosa => unaCosa.peso()})
+	}
 }
