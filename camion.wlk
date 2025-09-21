@@ -3,7 +3,6 @@ object camion {
 	const property cosas = #{}
 	const pesoTara = 1000
 	const pesoMaximoAceptable = 2500
-	//Metodos Lookers (Getters y Setters)
 	//Metodos de validacion y sus condiciones
 	method puedeCargar(unaCosa) {
 		return not cosas.contains(unaCosa)
@@ -74,5 +73,8 @@ object camion {
 	}
 	method totalBultos() {
 		return cosas.sum({unaCosa => unaCosa.bultos()})
+	}
+	method sufreAccidente() {
+		return cosas.forEach({unaCosa => unaCosa.efectoAccidente()})
 	}
 }
