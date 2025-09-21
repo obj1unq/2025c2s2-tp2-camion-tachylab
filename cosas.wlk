@@ -283,7 +283,5 @@ object embalajeSeguridad {
 		cosaEnvuelta = _cosaEnvuelta
 	}
 	//Metodos funcionales
-	method efectoAccidente() {
-		cosaEnvuelta.efectoAccidente()
-	}
+	method efectoAccidente() {}
 }
